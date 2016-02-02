@@ -1,0 +1,85 @@
+// Custom
+$package-path:                  '/packages/jhmr/';
+$icomoon-font-path:             '#{$package-path}css/fonts';
+$image-path:                    '#{$package-path}images/';
+$font-family-icomoon:           'icomoon';
+
+// Palette
+$theme-primary-color:           #015252;
+$theme-extra-light-color:       darken(#f1f1f1, 4%);
+$theme-light-color:             #838383;
+$theme-dark-color:              #000000;
+$theme-font-family:             'Oswald', sans-serif;
+$theme-font-family-cursive:     'Rock Salt', cursive;
+$theme-font-size:               16px;
+$theme-section-spacing:         90px;
+$dark-sexy:                     #231920;
+
+// Bootstrap
+$body-bg:                       #f1f1f1;
+
+$gray-darker:                   lighten($theme-dark-color, 20%);
+$gray-dark:                     lighten($theme-dark-color, 40%);
+$gray:                          $theme-light-color;
+$gray-light:                    lighten($theme-dark-color, 70%);
+$gray-lighter:                  lighten($theme-dark-color, 90%);
+
+$brand-primary:                 $theme-primary-color;
+$brand-success:                 $theme-primary-color;
+$brand-info:                    lighten($theme-primary-color, 12.5%);
+
+$link-color:                    lighten($theme-primary-color, 20%);
+$link-hover-color:              lighten($theme-primary-color, 24%);
+
+$text-color:                    $theme-extra-light-color;
+$font-family-base:              $theme-font-family;
+$font-size-base:                $theme-font-size;
+$headings-font-family:          $theme-font-family-cursive;
+
+$border-radius-base:            0;
+$border-radius-large:           0;
+$border-radius-small:           0;
+
+// Table stripe color
+$table-bg-accent:               rgba(255,255,255,0.2);
+
+$grid-gutter-width:             60px;
+$container-sm:                  100%;
+
+// Imports
+@import 'compass';
+// We can't just bulk-load all mixins from bootstrap as they override important (and better-handled)
+// mixins injected by compass! Specifically transition/transform.
+//@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/variables';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/image';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/grid';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/grid-framework';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/buttons';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/gradients';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/text-emphasis';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/background-variant';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/text-overflow';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/forms';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/table-row';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/tab-focus';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/center-block';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/hide-text';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/responsive-visibility';
+
+// Placeholder text (from bootstrap...mixins/vendor_prefixes)
+@mixin placeholder($color: $input-color-placeholder) {
+  &::-moz-placeholder           { color: $color;   // Firefox
+    opacity: 1; } // See https://github.com/twbs/bootstrap/pull/11526
+  &:-ms-input-placeholder       { color: $color; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: $color; } // Safari and Chrome
+}
+
+// Custom Mixins
+@mixin scrollOverflow {
+  overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+
+@mixin truncateText {
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;
+}

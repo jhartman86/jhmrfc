@@ -1,0 +1,28 @@
+@import "compass";
+@import '../../../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/mixins/gradients';
+$screen-md:992px;
+
+[image-slider]{font-size:0;line-height:0;position:relative;padding-bottom:60%;overflow:hidden;background:#DADADA;
+  &.covered {
+    .item {opacity:0;visibility:hidden;position:absolute;display:inline-block;height:100%;width:100%;top:0;left:0;right:0;bottom:0;background-size:cover;background-position:50% 50%;@include transition(all 0.35s ease);
+      &.active {opacity:1;visibility:visible;}
+      .descr {font-size:1rem;line-height:1;position:absolute;bottom:0;left:0;right:0;padding:1rem;color:#fff;@include text-shadow(0 0 5px rgba(0,0,0,0.35));@include gradient-vertical(rgba(0,0,0,0),rgba(0,0,0,1));
+        h4, p {margin:0;opacity:0;@include transition(all 0.35s ease);@include transform(translateY(-100%));}
+        p {padding-top:0.25rem;@include transition-delay(0.15s);
+          &:empty {display:none;}
+        }
+      }
+      &.active .descr {
+        h4,p {opacity:1;@include transform(translateY(0));}
+      }
+    }
+  }
+
+  [prev],[next]{color:#fff;position:absolute;top:50%;display:inline-block;font-size:4rem;z-index:2;cursor:pointer;@include transform(translateY(-50%));}
+  [prev]{left:0;}
+  [next]{right:0;}
+}
+
+@media screen and (min-width:$screen-md){
+  [image-slider]{padding-bottom:50%;}
+}

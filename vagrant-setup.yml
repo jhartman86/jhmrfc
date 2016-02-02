@@ -1,0 +1,175 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+######################################################################
+# Vast majority of the time, you should only need to customize
+# the boolean values of 'install_{whatever}' variables. Generally
+# advisable to keep configurations the same across projects for
+# continuity, unless you have a specific reason to change.
+
+  vars:
+    install_apache: true
+    install_mysql: true
+    install_redis: false
+    install_php: true
+    install_nodejs: true
+    install_ruby: true
+    autoinstall_C5: false
+    custom_role_path: "vagrant/roles"
+    # Edit these if you prefer
+    shared:
+      dbhost: "127.0.0.1"
+      dbuser: dev_user
+      dbpass: dev_pass
+      dbname: dev_site
+
+######################################################################
+
+  roles:
+    ######################################################################
+    # Setup base system stuff; generally don't screw with this...
+    ######################################################################
+    - role: "{{ custom_role_path }}/system"
+      user_env_variables:
+        - { user: vagrant, regexp: "export DATABASE1_HOST=", line: "export DATABASE1_HOST={{ shared.dbhost }}" }
+        - { user: vagrant, regexp: "export DATABASE1_USER=", line: "export DATABASE1_USER={{ shared.dbuser }}" }
+        - { user: vagrant, regexp: "export DATABASE1_PASS=", line: "export DATABASE1_PASS={{ shared.dbpass }}" }
+        - { user: vagrant, regexp: "export DATABASE1_NAME=", line: "export DATABASE1_NAME={{ shared.dbname }}" }
+        - { user: vagrant, regexp: "export CACHE1_HOST=", line: "export CACHE1_HOST=127.0.0.1" }
+        - { user: vagrant, regexp: "export CACHE1_PORT=", line: "export CACHE1_PORT=6379" }
+
+    ######################################################################
+    # Installs Apache if you specify true in the vars at the top
+    # --------------------------------------------------------------------
+    # virtual_hosts: contains settings for defining a virtual host file;
+    # if you're installing Apache, you want at least one. The defaults
+    # are probably OK, the only thing you want to focus on is the 'docroot'
+    # variable. In your project, if you're project structure looks like
+    # this:
+    # myproject/
+    #   vagrant/
+    #   other_stuff/
+    #   web/
+    #     index.php * <- entry point
+    # then you'd want to set it to /home/vagrant/app/web
+    ######################################################################
+    - role: "{{ custom_role_path }}/apache"
+      apache_users:
+        - vagrant
+      virtual_hosts:
+        - servername: "vagrant" # or "domain.com"
+          serveralias: "*"
+          docroot: "/home/vagrant/app/web"
+          env_vars:
+            - { name: "DATABASE1_HOST", value: "{{ shared.dbhost }}" }
+            - { name: "DATABASE1_USER", value: "{{ shared.dbuser }}" }
+            - { name: "DATABASE1_PASS", value: "{{ shared.dbpass }}" }
+            - { name: "DATABASE1_NAME", value: "{{ shared.dbname }}" }
+          php_env_vars:
+            - { name: "upload_max_filesize", value: "8M" }
+            - { name: "post_max_size", value: "8M" }
+            - { name: "max_input_time", value: "300" }
+            - { name: "max_execution_time", value: "300" }
+      when: install_apache == true
+
+    ######################################################################
+    # Installs MySQL if you specify true in the vars at the top
+    # --------------------------------------------------------------------
+    # The __mysql_packages settings below will override the default Ubuntu
+    # 14 default of install 5.5. If you DO want to use 5.5, simply remove
+    # the __mysql_packages all together.
+    ######################################################################
+    - role: "{{ custom_role_path }}/geerlingguy.mysql"
+      mysql_root_password: root
+      mysql_root_password_update: yes
+      mysql_log_error: /var/log/mysql/error.log
+      __mysql_packages:
+        - mysql-server-5.6
+        - mysql-common-5.6
+        - python-mysqldb
+      mysql_databases:
+        - name: "{{ shared.dbname }}"
+          encoding: utf8
+          collation: utf8_general_ci
+      mysql_users:
+        - { name: "admin", host: "%", password: "admin", priv: "*.*:ALL" }
+        - { name: "{{ shared.dbuser }}", host: "%", password: "{{ shared.dbpass }}", priv: "{{ shared.dbname }}.*:ALL" }
+      when: install_mysql == true
+      become: yes
+      become_user: root
+      become_method: su
+
+    ######################################################################
+    # Installs Redis if you specify true in the vars at the top
+    ######################################################################
+    - role: "{{ custom_role_path }}/redis"
+      when: install_redis == true
+
+    ######################################################################
+    # Install PHP (see roles/php/vars for examples of var definitions)
+    # --------------------------------------------------------------------
+    # To modify php.ini settings:
+    # php_ini_settings:
+    #   - { k: 'short_open_tag', v: 'Off' }
+    ######################################################################
+    - role: "{{ custom_role_path }}/php"
+      php_install_xdebug: false
+      php_install_phpunit: false
+      php_install_composer: false
+      php_install_redis_ext: false
+      php_sessions_use_redis: false
+      when: install_php == true
+
+    ######################################################################
+    # Install NodeJS (see roles/nodejs/vars for examples of var definitions)
+    # --------------------------------------------------------------------
+    # npm_global_packages: will install system-wide
+    # --------------------------------------------------------------------
+    # npm_package_json: will look for package.json in the file directory path
+    # you specify and run 'install' on it. If you don't want to auto-install
+    # packages on provisioning the machine, just remove npm_package_json and
+    # subsequent lines
+    ######################################################################
+    - role: "{{ custom_role_path }}/nodejs"
+      npm_global_packages:
+        - gulp
+        - bower
+      npm_package_json:
+        install: true
+        path: "/home/vagrant/app"
+      when: install_nodejs == true
+
+    ######################################################################
+    # Install ruby gems (assumes using system ruby)
+    ######################################################################
+    - role: "{{ custom_role_path }}/ruby"
+      ruby_user: vagrant
+      ruby_default_gems:
+        - bundler
+        - compass
+      when: install_ruby == true
+
+    ######################################################################
+    # Since we use this for Concrete5 a lot (although it is generic),
+    # enable autoinstall_C5 if you're dropping into a C5 project and this
+    # will install during the provision.
+    ######################################################################
+    - role: "{{ custom_role_path }}/concrete5"
+      run_composer: true
+      build_core_assets: true
+      apply_patches: true
+      when: autoinstall_C5 == true
+
+  # Random stuff after main dependencies are provisioned
+  post_tasks:
+    - name: Install MySQL timezone tables
+      shell: mysql_tzinfo_to_sql 2>/dev/null /usr/share/zoneinfo | mysql -u root --password=root mysql 2>/dev/null
+      when: install_mysql == true
+
+    - name: Restart apache
+      shell: echo null 2>/dev/null
+      notify: restart_apache
+      when: install_apache == true

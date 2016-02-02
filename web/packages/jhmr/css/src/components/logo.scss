@@ -1,0 +1,26 @@
+#c-level-1 .svg-logo{//max-width:240px;
+  //circle,ellipse {opacity:0;@include animation(bounce-in-down 1s ease forwards 0.25s);}
+  g {
+    &.logo-stroke path {stroke-dasharray:250;stroke-dashoffset:250;@include animation(logo-stroke 3s linear forwards 0.45s);}
+    &.logo-fill {opacity:0;@include animation(logo-filler 0.5s ease forwards 2s);}
+  }
+}
+
+@include keyframes(logo-stroke){
+  99% {stroke-dashoffset:0;}
+  100% {opacity:0;}
+}
+
+@include keyframes(logo-filler){
+  to {opacity:1;}
+}
+
+// https://github.com/daneden/animate.css/blob/master/source/bouncing_entrances/bounceInDown.css
+@include keyframes(bounce-in-down){
+  0%, 60%, 75%, 90%, 100% {transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);}
+  0% {opacity: 0;transform: translate3d(0, -3000px, 0);}
+  60% {opacity: 1;transform: translate3d(0, 15px, 0);}
+  75% {transform: translate3d(0, -10px, 0);}
+  90% {transform: translate3d(0, 5px, 0);}
+  100% {transform: none;opacity:1;}
+}

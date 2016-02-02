@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<styles version="1.0">
+    <set name="Font">
+        <style name="Page Font" variable="theme-font" type="type" />
+    </set>
+    <set name="Color Scheme">
+        <style name="Body Background Color" variable="theme-body-bg" type="color" />
+        <style name="Highlight Color" variable="theme-highlight" type="color" />
+        <style name="Theme Light Color" variable="theme-light" type="color" />
+        <style name="Theme Dark Color" variable="theme-dark" type="color" />
+        <style name="Navigation Bar Background Color" variable="theme-header-bg" type="color" />
+    </set>
+    <set name="Form Elements">
+        <style name="Input Background Color" variable="theme-input-bg" type="color" />
+        <style name="Input Font Color" variable="theme-input-font" type="color" />
+        <style name="Button Background Color" variable="theme-button-bg" type="color" />
+        <style name="Button Font Color" variable="theme-button-font" type="color" />
+    </set>
+    <set name="Spacing">
+        <style name="Section Spacing" variable="theme-section-spacing" type="size" />
+    </set>
+</styles>

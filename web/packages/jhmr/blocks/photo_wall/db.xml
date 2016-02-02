@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+    <table name="btPhotoWall">
+        <field name="bID" type="I">
+            <key />
+            <unsigned />
+        </field>
+        <field name="fileSource" type="I" size="2">
+            <unsigned />
+            <default value="0" />
+        </field>
+        <field name="fileSetID" type="I">
+            <UNSIGNED />
+        </field>
+
+        <index name="fileSetID">
+            <col>fileSetID</col>
+        </index>
+    </table>
+
+    <table name="btPhotoWallFiles">
+        <field name="bID" type="I">
+            <KEY/>
+            <UNSIGNED />
+            <NOTNULL />
+        </field>
+        <field name="fileID" type="I">
+            <KEY/>
+            <UNSIGNED />
+            <NOTNULL />
+        </field>
+        <field name="displayOrder" type="I" size="10">
+            <NOTNULL/>
+            <DEFAULT value="0"/>
+            <UNSIGNED/>
+        </field>
+
+        <index name="bIDfileID">
+            <UNIQUE />
+            <col>bID</col>
+            <col>fileID</col>
+        </index>
+        <index name="displayOrder">
+            <col>displayOrder</col>
+        </index>
+    </table>
+</schema>

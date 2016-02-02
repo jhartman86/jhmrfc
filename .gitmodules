@@ -1,0 +1,4 @@
+[submodule "vagrant"]
+	path = vagrant
+	url = https://github.com/jhartman86/vagrant-ansible.git
+	branch = master

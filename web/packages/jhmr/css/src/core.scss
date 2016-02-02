@@ -1,0 +1,19 @@
+// Custom variables
+@import url(//fonts.googleapis.com/css?family=Oswald:400,300,700|Rock+Salt);
+@import 'required';
+
+// Core dependencies
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/scaffolding';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/normalize';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/type';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/buttons';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/button-groups';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/forms';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/utilities';
+@import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/responsive-utilities';
+
+main {
+  @import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/grid';
+  @import '../../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap/tables';
+  table {@extend .table;@extend .table-striped;}
+}

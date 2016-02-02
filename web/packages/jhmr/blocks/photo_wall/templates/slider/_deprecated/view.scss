@@ -1,0 +1,25 @@
+@import "compass";
+
+[image-slider]{font-size:0;line-height:0;position:relative;padding-bottom:40%;overflow:hidden;background:#DADADA;
+  // Deprecated but kept around for good measure
+  &.neighbors {
+    .track {position:absolute;width:10000%;top:0;left:0;bottom:0;height:100%;}
+    .item {position:relative;display:inline-block;float:left;height:100%;
+      &::before {visibility:visible;opacity:1;display:block;content:'';position:absolute;top:-1px;right:-1px;bottom:-1px;left:-1px;min-width:100%;min-height:100%;background:rgba(darken(#231920,5%),0.75);@include transition(all 0.25s ease);}
+      &.active::before {visibility:hidden;opacity:0;}
+      img {height:100%;margin:0;padding:0;max-width:100%;}
+      .descr {font-size:1rem;line-height:1;position:absolute;bottom:0;left:0;right:0;padding:1rem;color:#fff;@include text-shadow(0 0 5px rgba(0,0,0,0.35));
+        h4, p {margin:0;opacity:0;@include transition(all 0.35s ease);@include transform(translateY(-100%));}
+        p {padding-top:0.25rem;@include transition-delay(0.15s);
+          &:empty {display:none;}
+        }
+      }
+      &.active .descr {
+        h4,p {opacity:1;@include transform(translateY(0));}
+      }
+    }
+  }
+  [prev],[next]{color:#fff;position:absolute;top:50%;display:inline-block;font-size:4rem;z-index:2;cursor:pointer;@include transform(translateY(-50%));}
+  [prev]{left:0;}
+  [next]{right:0;}
+}

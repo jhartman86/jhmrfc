@@ -1,0 +1,111 @@
+// Theme variables
+@import 'presets/defaults.less';
+
+// Fonts file
+@import ~"@{preset-fonts-file}";
+
+html, body {font-size:@theme-font-type-font-size;}
+
+body {
+  background:@theme-body-bg-color;
+  font-family:@theme-font-type-font-family;
+  color:@theme-font-type-font-color;
+  font-weight:@theme-font-type-font-weight;
+
+  #c-level-1 {
+    a, a:active, a:focus, a:hover {
+      color:@theme-highlight-color;
+    }
+
+    // Inputs
+    input, textarea {
+      color:@theme-input-font-color;
+      background-color:@theme-input-bg-color;
+      border-color:@theme-input-bg-color;
+    }
+
+    // Buttons
+    button, .btn, .btn-default {
+      color:@theme-button-font-color;
+      background-color:@theme-button-bg-color;
+      border-color:@theme-button-bg-color;
+
+      &:hover {
+        background-color:lighten(@theme-button-bg-color, 12%);
+        border-color:lighten(@theme-button-bg-color, 12%);
+      }
+    }
+
+    header {
+      a {
+        color:@theme-light-color;
+
+        &:hover, &:active, &:focus {color:@theme-highlight-color;}
+      }
+    }
+
+    // Sections
+    section {
+      padding:@theme-section-spacing-size 0;
+
+      [class*="wrap-"] {
+        margin:-@theme-section-spacing-size 0;
+        padding:@theme-section-spacing-size 0;
+      }
+
+      .wrap-theme-highlight {
+        background:@theme-highlight-color;
+      }
+
+      .wrap-theme-light {
+        background:@theme-light-color;
+      }
+
+      .wrap-theme-dark {
+        background:@theme-dark-color;
+      }
+    }
+
+    // Generic Classes
+    .theme-highlight-color {
+      color:@theme-highlight-color;
+    }
+
+    .theme-light-color {
+      color:@theme-light-color;
+    }
+
+    .theme-dark-color {
+      color:@theme-dark-color;
+    }
+
+    .anglified p::before {
+      color:@theme-highlight-color;
+    }
+
+    .iconified::before {
+      color:@theme-highlight-color;
+    }
+
+    // Accordions
+    [accordion] .group .accordion-header {
+      color:@theme-highlight-color;
+    }
+
+    // Masthead
+    [masthead] .node .node-content ul li::before {
+      color:@theme-highlight-color;
+    }
+
+    aside[scroll-top]:hover {
+      background:rgba(red(@theme-highlight-color), green(@theme-highlight-color), blue(@theme-highlight-color), 0.85);
+    }
+  }
+}
+
+@media screen and (min-width:768px){
+  #c-level-1 {
+    // Header
+    header {background:@theme-header-bg-color;}
+  }
+}
