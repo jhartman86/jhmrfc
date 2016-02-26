@@ -13,7 +13,7 @@
   vars:
     install_apache: true
     install_mysql: true
-    install_redis: false
+    install_redis: true
     install_php: true
     install_nodejs: true
     install_ruby: true
