@@ -4,15 +4,7 @@
 <body class="<?php echo $templateHandle; ?>">
 
 <div id="c-level-1" class="<?php echo $c->getPageWrapperClass(); ?>">
-
-    <?php $this->inc('elements/nav.php'); ?>
-
     <main revealing>
-        <?php
-        $this->inc('elements/header.php', array(
-            'expanded' => true
-        )); ?>
-
         <div class="area-main">
             <?php
                 /** @var $a \Concrete\Core\Area\Area */
@@ -22,8 +14,6 @@
                 $a->display($c);
             ?>
         </div>
-
-        <?php $this->inc('elements/footer.php'); ?>
     </main>
 </div>
 
