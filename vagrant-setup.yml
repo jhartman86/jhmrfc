@@ -13,7 +13,7 @@
   vars:
     install_apache: true
     install_mysql: true
-    install_redis: true
+    install_redis: false
     install_php: true
     install_nodejs: true
     install_ruby: true
@@ -86,10 +86,6 @@
       mysql_root_password: root
       mysql_root_password_update: yes
       mysql_log_error: /var/log/mysql/error.log
-      __mysql_packages:
-        - mysql-server-5.6
-        - mysql-common-5.6
-        - python-mysqldb
       mysql_databases:
         - name: "{{ shared.dbname }}"
           encoding: utf8

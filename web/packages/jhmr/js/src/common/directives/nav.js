@@ -1,13 +1,13 @@
 /* global Power2 */
 angular.module('jhmr.common').
 
-    directive('nav', ['$window', 'Tween', function( $window, Tween ){
+    directive('mainNav', ['$window', 'Tween', function( $window, Tween ){
 
-        function _link( scope, $elem, attrs ){
+        function _link( _, $elem ){
 
             var $html      = angular.element(document.documentElement),
                 lastScroll = 0,
-                threshold  = $elem[0].offsetTop, //$elem[0].getBoundingClientRect().top,
+                threshold  = $elem[0].offsetTop,
                 isDocked   = false;
 
             // Dock handler
@@ -22,9 +22,8 @@ angular.module('jhmr.common').
             });
 
             // Navigate to handler
-            angular.element($elem[0].querySelectorAll('a[href]')).on('click', function( e ){
+            angular.element($elem[0].querySelectorAll('a[href^="#"]')).on('click', function(e){
                 e.preventDefault();
-
                 var target = document.querySelector(this.getAttribute('href'));
                 if( target ){
                     Tween.to($window, 0.65, {
@@ -32,11 +31,19 @@ angular.module('jhmr.common').
                         ease:       Power2.easeOut
                     });
                 }
+                // not applicable unless user is on mobile device, but make sure class is always
+                // removed (doesn't do anything if on large device)
+                $html.toggleClass('sidebar-nav-open', false);
+            });
+
+            // Mobile: trigger nav open class
+            angular.element($elem[0].querySelector('a[trigger]')).on('click', function(e){
+                $html.toggleClass('sidebar-nav-open');
             });
         }
 
         return {
-            restrict: 'E',
+            restrict: 'A',
             link:     _link
         };
     }]);

@@ -10,8 +10,9 @@
                 <div class="cellular text-center">
                     <?php $this->inc('../../images/crest.svg'); ?>
                     <h1>Smashing Since 1990</h1>
-                    <nav>
-                        <ul class="list-unstyled list-inline">
+                    <nav main-nav>
+                        <a trigger><i class="icon-bars"></i></a>
+                        <ul>
                             <li class="visible-on-dock"><a href="#intro">JHMRFC</a></li>
                             <li><a href="#the-club">The Club</a></li>
                             <li><a href="#calendar">Calendar</a></li>
@@ -22,7 +23,10 @@
                         </ul>
                     </nav>
 
-                    <p class="quick-contact"><span>Mens</span>: <a href="mailto:jhmooserugby@gmail.com">jhmooserugby@gmail.com</a> | <span>Womens</span>: <a href="mailto:jhwomensrugby@gmail.com">jhwomensrugby@gmail.com</a></p>
+                    <div class="quick-contact">
+                        <a href="mailto:jhmooserugby@gmail.com"><span>Men</span> jhmooserugby@gmail.com</a>
+                        <a href="mailto:jhwomensrugby@gmail.com"><span>Women</span> jhwomensrugby@gmail.com</a>
+                    </div>
                 </div>
             </div>
         </section>

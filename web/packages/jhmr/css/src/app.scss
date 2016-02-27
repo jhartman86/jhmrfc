@@ -25,12 +25,14 @@ main {height:100%;//overflow-x:hidden;
     &::before {display:none;}
     svg {margin-bottom:1rem;}
     h1 {font-size:160%;margin:-1rem 0 1rem;}
-    .quick-contact {padding-top:1rem;letter-spacing:1px;
-      //span {color:lighten($theme-primary-color, 20%);}
+    .quick-contact {text-align:center;
+      a {display:inline-block;margin:0.75rem;background:$theme-primary-color;padding:0 1rem 0 0;
+        span {display:inline-block;background:rgba(0,0,0,0.3);color:#fff;padding:0.5rem 1rem;margin:0 1rem 0 0;}
+      }
     }
   }
 
-  #the-club{padding:6rem 0;background:url('#{$image-path}fieldofdreams.jpg') no-repeat 50% 50%;background-size:cover;background-attachment:fixed;
+  #the-club{padding:6rem 0;background:url('#{$image-path}team2.jpg') no-repeat 50% 50%;background-size:cover;background-attachment:fixed;
 
   }
 
@@ -38,7 +40,7 @@ main {height:100%;//overflow-x:hidden;
 
   }
 
-  #legacy{padding:6rem 0;background:url('#{$image-path}team2.jpg') no-repeat 50% 50%;background-size:cover;background-attachment:fixed;
+  #legacy{padding:6rem 0;background:url('#{$image-path}fieldofdreams.jpg') no-repeat 50% 50%;background-size:cover;background-attachment:fixed;
 
   }
 
@@ -59,29 +61,11 @@ main {height:100%;//overflow-x:hidden;
   }
 }
 
-nav {margin:0;text-transform:uppercase;
-  ul {font-size:130%;margin:0;
-    li {
-      &.visible-on-dock {display:none;}
-      a {display:block;padding:0.5rem 1rem;background:rgba($theme-primary-color,0.5);text-decoration:none !important;
-        &:hover {background:lighten($theme-primary-color, 12%);color:darken($theme-primary-color,12%);}
-      }
-    }
-  }
-}
-html.nav-docked nav {position:fixed;top:0;left:0;right:0;width:100%;z-index:1;background:$theme-primary-color;@include box-shadow(0 8px 27px rgba(0, 0, 0, 0.35));
-  ul {display:table;width:100%;margin:0;
-    li {display:table-cell;padding:0;
-      &.visible-on-dock {display:table-cell;}
-      a {padding:1rem 0.5rem;}
-    }
-  }
-}
 
-@import 'components/logo';
-@import 'components/footer';
+@import 'components/nav';
+//@import 'components/logo';
 @import 'components/icomoon';
-@import 'components/logo_load_progress';
+//@import 'components/logo_load_progress';
 @import 'page_types/default';
 
 //////////////////////////////////////////////////////////////////////
