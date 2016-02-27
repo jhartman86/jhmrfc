@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-1'); $a->display($c); ?>
+                        <?php $a = new Area('Main-1'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-2'); $a->display($c); ?>
+                        <?php $a = new Area('Main-2'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-3'); $a->display($c); ?>
+                        <?php $a = new Area('Main-3'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-3'); $a->display($c); ?>
+                        <?php $a = new Area('Main-4'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-3'); $a->display($c); ?>
+                        <?php $a = new Area('Main-5'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?php $a = new Area('Main-4'); $a->display($c); ?>
+                        <?php $a = new Area('Main-6'); $a->setAreaGridMaximumColumns(12); $a->display($c); ?>
                     </div>
                 </div>
             </div>
